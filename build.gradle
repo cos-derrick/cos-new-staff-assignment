@@ -1,0 +1,69 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.22.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'war'
+    apply plugin: 'maven'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'com.cosmos'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+    }
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile('org.springframework.batch:spring-batch-test')
+
+        developmentOnly('org.springframework.boot:spring-boot-starter-tomcat')
+        developmentOnly('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework:spring-tx:4.3.13.RELEASE')
+        compile('org.springframework:spring-orm:4.3.13.RELEASE')
+
+        compile group: 'com.oracle.ojdbc', name: 'ojdbc8', version: '19.3.0.0'
+
+        compile('org.hibernate:hibernate-validator:5.1.3.Final')
+        compile('org.hibernate:hibernate-c3p0:5.1.11.Final')
+        compile('javax.transaction:jta:1.1')
+
+        compile('javax.inject:javax.inject:1')
+
+        runtime('ch.qos.logback:logback-classic:1.2.3')
+        compile('org.slf4j:slf4j-api:1.7.29')
+        compile('org.slf4j:log4j-over-slf4j:1.7.29')
+        compile('org.slf4j:jcl-over-slf4j:1.7.29')
+        compile('org.slf4j:jul-to-slf4j:1.7.29')
+
+        compile('org.apache.commons:commons-collections4:4.2')
+        compile('org.apache.commons:commons-lang3:3.8')
+    }
+
+}

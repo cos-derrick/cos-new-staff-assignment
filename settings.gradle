@@ -1,0 +1,3 @@
+rootProject.name = 'com.cosmos.assignment'
+include 'backend'
+include 'frontend'
